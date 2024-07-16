@@ -40,7 +40,7 @@ TIME=$(date +%H.%M.%S)
 NAME="Screencast ${DATE} at ${TIME}"
 
 # Where to save it
-DIR="${HOME}/Videos/"
+DIR="${HOME}/Desktop/"
 
 
 
@@ -184,7 +184,7 @@ write_config() {
 			echo
 
 			echo "# Default Directory to save video files"
-			echo "DIR=\"$HOME/Videos\""
+			echo "DIR=\"$HOME/Desktop\""
 			echo
 
 			echo "# Default video container extension"
@@ -307,7 +307,8 @@ print_help() {
 	echo "                  Use: --oargs=\"-crf 0\""
 	echo "                  Default: '-crf 0 -preset ultrafast'"
 	echo
-	echo "-o           Output video file name"
+	echo "-o <filename>	Output video file name"
+	echo "			E.g.: -o myfile, or -o recording1"
 	echo
 	echo
 	echo "Behavior options:"
@@ -1093,7 +1094,7 @@ if [ "${RECORD_S}" = "yes" ]; then
 	if [ ${#CHOSEN_S_NUM} -gt 0 ]; then
 		if ! screen_device_exists "$CHOSEN_S_NUM"; then
 			echo "Screen recording device: '${CHOSEN_S_NUM}' does not exist."
-			exit 1
+			exit -1
 		fi
 		screen_device="$CHOSEN_S_NUM"
 
@@ -1116,7 +1117,7 @@ if [ "${RECORD_A}" = "yes" ]; then
 	if [ ${#CHOSEN_A_NUM} -gt 0 ]; then
 		if ! audio_device_exists "$CHOSEN_A_NUM"; then
 			echo "Audio recording device: '${CHOSEN_A_NUM}' does not exist."
-			exit 1
+			exit -1
 		fi
 		audio_device="$CHOSEN_A_NUM"
 
@@ -1139,7 +1140,7 @@ if [ "${RECORD_C}" = "yes" ]; then
 	if [ ${#CHOSEN_C_NUM} -gt 0 ]; then
 		if ! camera_device_exists "$CHOSEN_C_NUM"; then
 			echo "Camera recording device: '${CHOSEN_C_NUM}' does not exist."
-			exit 1
+			exit -1
 		fi
 		camera_device="$CHOSEN_C_NUM"
 
